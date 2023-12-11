@@ -18,3 +18,18 @@ function maxDepth(root: TreeNode | null): number {
   let rightDep = maxDepth(root.right)
   return Math.max(leftDep, rightDep) + 1
 }
+
+function maxDepth1(root: TreeNode | null): number {
+  if (!root) return 0;
+  let depth = 0, stack = [root];
+  while (stack.length) {
+    let length = stack.length;
+    depth++;
+    while (length--) {
+      const node = stack.shift();
+      node?.left && stack.push(node.left);
+      node?.right && stack.push(node.right);
+    }
+  }
+  return depth;
+};
